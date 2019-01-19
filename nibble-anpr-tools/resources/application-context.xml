@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+   	http://www.springframework.org/schema/context
+   	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="it.nibble.anpr">
+		<context:include-filter type="regex" expression=".component.*"/>
+		<context:include-filter type="regex" expression=".config.*"/>
+	</context:component-scan>
+	
+	
+	<bean id="propertiesPlacholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >	 
+  	 <property name="ignoreResourceNotFound" value="true"/>  
+     <property name="locations">  
+       <list>  
+       	   <value>file:#{systemProperties['user.dir']}/config/db.config</value>       
+       	   <value>file:#{systemProperties['user.dir']}/config/video.config</value>
+		   <value>file:#{systemProperties['user.dir']}/config/server.config</value>       
+           <value>file:#{systemProperties['user.dir']}/config/detection.config</value>           
+           <value>file:#{systemProperties['user.dir']}/config/ocr.config</value>              
+       </list>  
+    </property>  
+ </bean>  
+	
+
+</beans>
